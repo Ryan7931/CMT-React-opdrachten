@@ -1,12 +1,16 @@
 import './App.css'
-import Book from './Book.jsx'
+import Header from './Header.jsx'
+import BookList from './BookList.jsx'
+import Layout from './Layout.jsx'
 
 function App() {
-
   return (
     <>
+      <Header />
       <h1>Opdracht 1 - Books</h1>
-      <Book title="het leven van een loser" author="Ryan"/>
+      <Layout>
+        <BookList />
+      </Layout>
     </>
   )
 }
