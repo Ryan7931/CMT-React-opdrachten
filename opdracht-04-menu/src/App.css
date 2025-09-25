@@ -40,3 +40,85 @@
 .read-the-docs {
   color: #888;
 }
+
+body {
+  background: linear-gradient(135deg, #f8f6f0 0%, #e3d9c6 100%);
+  min-height: 100vh;
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+}
+
+.menu-container {
+  max-width: 1000px;
+  margin: 40px auto;
+  background: rgba(255,255,255,0.95);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(60,40,20,0.15);
+  padding: 32px 24px;
+}
+
+.menu-container h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+  color: #7c5e3c;
+  text-shadow: 0 2px 8px #e3d9c6;
+}
+
+.menu-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 32px;
+}
+
+.menu-item {
+  background: #fff8f0;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(124,94,60,0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.menu-item:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(124,94,60,0.18);
+}
+
+.menu-img {
+  width: 220px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-top: 18px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(124,94,60,0.10);
+}
+
+.menu-info {
+  padding: 0 18px 18px 18px;
+  text-align: left;
+  width: 100%;
+}
+.menu-info h2 {
+  font-size: 1.3rem;
+  color: #7c5e3c;
+  margin-bottom: 6px;
+}
+.menu-category {
+  font-size: 0.95rem;
+  color: #bfa77a;
+  margin-bottom: 2px;
+}
+.menu-price {
+  font-size: 1.1rem;
+  color: #c49a6c;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.menu-desc {
+  font-size: 0.98rem;
+  color: #6e5a3a;
+  margin-bottom: 0;
+}
