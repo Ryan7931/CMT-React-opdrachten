@@ -1,7 +1,7 @@
 import './App.css'
-import Header from './Header.jsx'
-import BookList from './BookList.jsx'
-import Layout from './Layout.jsx'
+import Header from './components/Header.jsx'
+import BookList from './components/BookList.jsx'
+import Layout from './components/Layout.jsx'
 
 function App() {
   return (
