@@ -1,0 +1,24 @@
+/* HomePage.css */
+
+.homepage {
+  padding: 2rem;
+  background: linear-gradient(135deg, #f8f6f0 0%, #e3d9c6 100%);
+  min-height: 100vh;
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+}
+.homepage h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 32px;
+  color: #7c5e3c;
+  text-shadow: 0 2px 8px #e3d9c6;
+  text-align: center;
+}
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+}

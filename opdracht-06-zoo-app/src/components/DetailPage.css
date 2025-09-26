@@ -1,0 +1,55 @@
+/* DetailPage.css */
+
+.detail-page {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2.5rem 2rem;
+  background: rgba(255,255,255,0.97);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(60,40,20,0.15);
+  text-align: center;
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+}
+.detail-img {
+  width: 320px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(124,94,60,0.10);
+}
+.detail-page h1 {
+  font-size: 2rem;
+  color: #7c5e3c;
+  margin-bottom: 1rem;
+}
+.detail-info {
+  text-align: left;
+  margin: 0 auto 2rem auto;
+  max-width: 400px;
+  background: #fff8f0;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 2px 8px rgba(124,94,60,0.08);
+}
+.detail-info p {
+  font-size: 1.05rem;
+  color: #6e5a3a;
+  margin: 0.5rem 0;
+}
+button {
+  margin-bottom: 1rem;
+  padding: 0.5rem 1.2rem;
+  border: none;
+  background: #1976d2;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(60,40,20,0.10);
+  transition: background 0.2s;
+}
+button:hover {
+  background: #1565c0;
+}

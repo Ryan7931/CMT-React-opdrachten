@@ -1,3 +1,18 @@
+body {
+  background: linear-gradient(135deg, #ff6f91 0%, #ffb86c 25%, #f8f6f0 50%, #fce4ec 75%, #ff61a6 100%);
+  min-height: 100vh;
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
+  background-size: 3000% 3000%;
+  animation: gradientMove 1.2s linear infinite;
+}
+
+@keyframes gradientMove {
+  0% {background-position: 0% 0%;}
+  25% {background-position: 100% 0%;}
+  50% {background-position: 100% 100%;}
+  75% {background-position: 0% 100%;}
+  100% {background-position: 0% 0%;}
+}
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -16,6 +31,12 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+body {
+  background: linear-gradient(135deg, #ffe5ec 0%, #ffd6c0 40%, #f8f6f0 70%, #fce4ec 100%);
+  min-height: 100vh;
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif;
 }
 
 @keyframes logo-spin {
