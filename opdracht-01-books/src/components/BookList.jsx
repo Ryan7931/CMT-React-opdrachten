@@ -5,26 +5,35 @@ function BookList() {
   // Array van boeken in state
   const [books] = useState([
     {
-      title: "The hunger games",
+      id: 1,
+      title: "The Hunger Games",
       author: "Suzanne Collins",
-      image: "/images/book-3.png"
+      image: "/images/book-3.png",
+      year: 2008,
+      series: "The Hunger Games"
     },
     {
+      id: 2,
       title: "Fantasia VI",
       author: "Geronimo Stilton",
-      image: "/images/book-2.png"
+      image: "/images/book-2.png",
+      year: 2011,
+      series: "Fantasia"
     },
     {
-      title: "Harry Potter and the sorcerer's stone",
+      id: 3,
+      title: "Harry Potter and the Sorcerer's Stone",
       author: "J.K. Rowling",
-      image: "/images/book-1.png"
+      image: "/images/book-1.png",
+      year: 1997,
+      series: "Harry Potter"
     }
   ]);
 
   return (
     <div className="book-list">
-      {books.map((book, idx) => (
-        <Book key={idx} title={book.title} author={book.author} image={book.image} />
+      {books.map((book) => (
+        <Book key={book.id} {...book} />
       ))}
     </div>
   );

@@ -1,15 +1,8 @@
-import '../App.css';
 
 function Header() {
   return (
-    <header className="navbar">
-      <nav>
-        <ul className="nav-list">
-          <li>Home</li>
-          <li>Contact</li>
-          <li>About Us</li>
-        </ul>
-      </nav>
+    <header>
+      {/* Je kunt hier eventueel een logo of subtitel plaatsen */}
     </header>
   );
 }

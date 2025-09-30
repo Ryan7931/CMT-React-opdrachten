@@ -1,0 +1,30 @@
+/* Navigation.css */
+.navbar {
+  background: linear-gradient(90deg, #f8f6f0 0%, #ffe5ec 60%, #ffb86c 100%);
+  padding: 1rem 0.5rem;
+  box-shadow: 0 2px 8px rgba(60,40,20,0.10);
+  border-radius: 0 0 16px 16px;
+}
+.nav-list {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+.nav-list li {
+  font-size: 1.1rem;
+}
+.nav-list a {
+  text-decoration: none;
+  color: #7c5e3c;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-list a:hover {
+  background: #ffb86c;
+  color: #fff;
+}
