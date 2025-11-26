@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './App.css'
 import CreateMessage from './components/CreateMessage'
-import MessageList from './components/MessageList'
+import MessageList from './components/Messagelist'
 
 function App() {
   const [textInput, setTextInput] = useState("");
