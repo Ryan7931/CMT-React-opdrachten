@@ -1,6 +1,6 @@
 function TodoInput({ newTodo, setNewTodo, handleAddTodo }) {
     return (
-        <div>
+        <div className="">
             <input
                 type="text"
                 value={newTodo}

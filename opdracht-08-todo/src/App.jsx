@@ -14,10 +14,10 @@ function App() {
   }
 
   return (
-    <div>
-      <h1>To-Do App</h1>
+    <div className='flex flex-col items-center '>
+      <h1 className='text-amber-50 text-7xl font-bold margin-'>Ryan KA To-Do App</h1>
 
-      <TodoInput newTodo={newTodo} setNewTodo={setNewTodo} handleAddTodo={handleAddTodo} />
+      <TodoInput className="" newTodo={newTodo} setNewTodo={setNewTodo} handleAddTodo={handleAddTodo} />
 
       <TodoList todos={todos} />
 
