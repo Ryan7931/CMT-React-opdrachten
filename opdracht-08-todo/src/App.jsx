@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className='flex flex-col items-center '>
-      <h1 className='text-amber-50 text-7xl font-bold margin-'>Ryan KA To-Do App</h1>
+      <h1 className='text-amber-50 text-7xl font-bold m-30'>Ryan KA To-Do App</h1>
 
       <TodoInput className="" newTodo={newTodo} setNewTodo={setNewTodo} handleAddTodo={handleAddTodo} />
 
