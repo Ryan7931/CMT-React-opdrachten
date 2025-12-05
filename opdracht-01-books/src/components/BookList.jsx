@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Book from './Book.jsx';
 
 function BookList() {
+
   const originalBooks = [
     {
       id: 1,
@@ -9,7 +10,8 @@ function BookList() {
       author: "Suzanne Collins",
       image: "/images/book-3.png",
       year: 2008,
-      series: "The Hunger Games"
+      series: "The Hunger Games",
+      category: "Avontuur"
     },
     {
       id: 2,
@@ -17,7 +19,8 @@ function BookList() {
       author: "Geronimo Stilton",
       image: "/images/book-2.png",
       year: 2011,
-      series: "Fantasia"
+      series: "Fantasia",
+      category: "Fantasy"
     },
     {
       id: 3,
@@ -25,12 +28,23 @@ function BookList() {
       author: "J.K. Rowling",
       image: "/images/book-1.png",
       year: 1997,
-      series: "Harry Potter"
+      series: "Harry Potter",
+      category: "Fantasy"
     }
   ];
 
   const [books, setBooks] = useState(originalBooks);
   const [searchInput, setSearchInput] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("Alle");
+
+  const categories = [
+    'Alle',
+    'Fantasy',
+    'Avontuur',
+    'Sciencefiction',
+    'Thriller',
+    'Romance'
+  ];
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -44,22 +58,46 @@ function BookList() {
     setBooks(filtered);
   };
 
+  const filterHandler = (e) => {
+    const category = e.target.value;
+    setSelectedCategory(category);
+
+    if (category === 'Alle') {
+      setBooks(originalBooks);
+    } else {
+      const filtered = originalBooks.filter(book => book.category === category);
+      setBooks(filtered);
+    }
+  };
+
   return (
     <div>
 
+      {/* zoekbalk */}
       <input
         type="text"
         placeholder="Zoek op titel..."
         value={searchInput}
         onChange={handleChange}
-        style={{
-          width: "100%",
-          padding: "10px",
-          marginBottom: "20px",
-          fontSize: "16px"
-        }}
       />
 
+      {/* categorie filter */}
+      <div className="filter">
+        <label htmlFor="category">Filter op categorie: </label>
+        <select
+          id="category"
+          value={selectedCategory}
+          onChange={filterHandler}
+        >
+          {categories.map((cat, index) => (
+            <option key={index} value={cat}>
+              {cat}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {/* boeken tonen */}
       <div className="book-list">
         {books.map((book) => (
           <Book key={book.id} {...book} />
