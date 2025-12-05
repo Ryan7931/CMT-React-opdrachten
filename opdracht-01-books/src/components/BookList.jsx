@@ -2,7 +2,6 @@ import { useState } from 'react';
 import Book from './Book.jsx';
 
 function BookList() {
-  // originele lijst van boeken
   const originalBooks = [
     {
       id: 1,
@@ -30,17 +29,14 @@ function BookList() {
     }
   ];
 
-  // state voor boeken en zoekopdracht
   const [books, setBooks] = useState(originalBooks);
   const [searchInput, setSearchInput] = useState("");
 
-  // handle zoekbalk
   const handleChange = (e) => {
     e.preventDefault();
     const value = e.target.value;
     setSearchInput(value);
 
-    // filteren (niet hoofdlettergevoelig)
     const filtered = originalBooks.filter((book) =>
       book.title.toLowerCase().includes(value.toLowerCase())
     );
@@ -51,7 +47,6 @@ function BookList() {
   return (
     <div>
 
-      {/* zoekbalk */}
       <input
         type="text"
         placeholder="Zoek op titel..."
@@ -65,7 +60,6 @@ function BookList() {
         }}
       />
 
-      {/* boekenlijst */}
       <div className="book-list">
         {books.map((book) => (
           <Book key={book.id} {...book} />
