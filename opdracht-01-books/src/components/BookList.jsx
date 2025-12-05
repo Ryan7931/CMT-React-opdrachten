@@ -2,8 +2,8 @@ import { useState } from 'react';
 import Book from './Book.jsx';
 
 function BookList() {
-  // Array van boeken in state
-  const [books] = useState([
+  // originele lijst van boeken
+  const originalBooks = [
     {
       id: 1,
       title: "The Hunger Games",
@@ -28,13 +28,49 @@ function BookList() {
       year: 1997,
       series: "Harry Potter"
     }
-  ]);
+  ];
+
+  // state voor boeken en zoekopdracht
+  const [books, setBooks] = useState(originalBooks);
+  const [searchInput, setSearchInput] = useState("");
+
+  // handle zoekbalk
+  const handleChange = (e) => {
+    e.preventDefault();
+    const value = e.target.value;
+    setSearchInput(value);
+
+    // filteren (niet hoofdlettergevoelig)
+    const filtered = originalBooks.filter((book) =>
+      book.title.toLowerCase().includes(value.toLowerCase())
+    );
+
+    setBooks(filtered);
+  };
 
   return (
-    <div className="book-list">
-      {books.map((book) => (
-        <Book key={book.id} {...book} />
-      ))}
+    <div>
+
+      {/* zoekbalk */}
+      <input
+        type="text"
+        placeholder="Zoek op titel..."
+        value={searchInput}
+        onChange={handleChange}
+        style={{
+          width: "100%",
+          padding: "10px",
+          marginBottom: "20px",
+          fontSize: "16px"
+        }}
+      />
+
+      {/* boekenlijst */}
+      <div className="book-list">
+        {books.map((book) => (
+          <Book key={book.id} {...book} />
+        ))}
+      </div>
     </div>
   );
 }
