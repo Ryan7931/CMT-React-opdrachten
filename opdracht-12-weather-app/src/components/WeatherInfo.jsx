@@ -12,8 +12,8 @@ const WeatherInfo = ({ data }) => {
         className="mx-auto"
       />
 
-      <p className="text-xl">🌡️ {data.main.temp}°C</p>
-      <p>Gevoelstemperatuur: {data.main.feels_like}°C</p>
+      <p className="text-xl">🌡️ {Math.floor(data.main.temp)}°C</p>
+      <p>Gevoelstemperatuur: {Math.floor(data.main.feels_like)}°C</p>
       <p>Luchtvochtigheid: {data.main.humidity}%</p>
       <p>Wind: {data.wind.speed} m/s</p>
     </div>
