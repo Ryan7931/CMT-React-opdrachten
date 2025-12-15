@@ -1,38 +1,8 @@
 import { useState } from 'react';
 import Book from './Book.jsx';
+import { originalBooks } from './category.js'; 
 
 function BookList() {
-
-  const originalBooks = [
-    {
-      id: 1,
-      title: "The Hunger Games",
-      author: "Suzanne Collins",
-      image: "/images/book-3.png",
-      year: 2008,
-      series: "The Hunger Games",
-      category: "Avontuur"
-    },
-    {
-      id: 2,
-      title: "Fantasia VI",
-      author: "Geronimo Stilton",
-      image: "/images/book-2.png",
-      year: 2011,
-      series: "Fantasia",
-      category: "Fantasy"
-    },
-    {
-      id: 3,
-      title: "Harry Potter and the Sorcerer's Stone",
-      author: "J.K. Rowling",
-      image: "/images/book-1.png",
-      year: 1997,
-      series: "Harry Potter",
-      category: "Fantasy"
-    }
-  ];
-
   const [books, setBooks] = useState(originalBooks);
   const [searchInput, setSearchInput] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Alle");
@@ -47,7 +17,6 @@ function BookList() {
   ];
 
   const handleChange = (e) => {
-    e.preventDefault();
     const value = e.target.value;
     setSearchInput(value);
 
@@ -55,34 +24,41 @@ function BookList() {
       book.title.toLowerCase().includes(value.toLowerCase())
     );
 
-    setBooks(filtered);
+    const finalFiltered = selectedCategory === 'Alle'
+      ? filtered
+      : filtered.filter(book => book.category === selectedCategory);
+
+    setBooks(finalFiltered);
   };
 
   const filterHandler = (e) => {
     const category = e.target.value;
     setSelectedCategory(category);
 
-    if (category === 'Alle') {
-      setBooks(originalBooks);
-    } else {
-      const filtered = originalBooks.filter(book => book.category === category);
-      setBooks(filtered);
-    }
+    const filteredByCategory = category === 'Alle'
+      ? originalBooks
+      : originalBooks.filter(book => book.category === category);
+
+    const finalFiltered = searchInput
+      ? filteredByCategory.filter(book =>
+          book.title.toLowerCase().includes(searchInput.toLowerCase())
+        )
+      : filteredByCategory;
+
+    setBooks(finalFiltered);
   };
 
   return (
     <div>
-
-      {/* zoekbalk */}
       <input
         type="text"
         placeholder="Zoek op titel..."
         value={searchInput}
         onChange={handleChange}
+        style={{ marginBottom: '10px', padding: '5px', width: '200px' }}
       />
 
-      {/* categorie filter */}
-      <div className="filter">
+      <div className="filter" style={{ marginBottom: '20px' }}>
         <label htmlFor="category">Filter op categorie: </label>
         <select
           id="category"
@@ -97,10 +73,19 @@ function BookList() {
         </select>
       </div>
 
-      {/* boeken tonen */}
-      <div className="book-list">
+      <div className="book-list" style={{ 
+        display: 'flex', 
+        flexWrap: 'wrap', 
+        gap: '20px' 
+      }}>
         {books.map((book) => (
-          <Book key={book.id} {...book} />
+          <Book
+            key={book.id}
+            {...book}
+            description={book.description}
+            year={book.year}
+            pages={book.pages}
+          />
         ))}
       </div>
     </div>

@@ -1,0 +1,79 @@
+.book {
+  perspective: 1000px;
+  cursor: pointer;
+  height: 550px;
+  width: 250px;
+  margin: 20px;
+}
+
+.book-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.book.flipped .book-inner {
+  transform: rotateY(180deg);
+}
+
+.book-front,
+.book-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.book-back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.book-back h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #4a90e2;
+}
+
+.book-back p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.book-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.favorite-section {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.heart-button {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.favorited-text {
+  color: green;
+  margin-top: 5px;
+  font-weight: bold;
+}
