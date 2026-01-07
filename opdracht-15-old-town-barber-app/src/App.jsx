@@ -1,9 +1,11 @@
-// src/App.jsx
-import './app.css'
+import "./app.css";
 import { useEffect, useState } from "react";
 import { ToastContainer } from "react-toastify";
 import UserProfileForm from "./components/UserProfile";
+import ShopInfo from "./components/ShopInfo";
 import "react-toastify/dist/ReactToastify.css";
+import BookingForm from "./components/BookingForm";
+
 
 const STORAGE_KEY = "userProfile";
 
@@ -24,7 +26,11 @@ function App() {
       {!userProfile ? (
         <UserProfileForm onSave={setUserProfile} />
       ) : (
-        <h1>Welkom, {userProfile.name} 👋</h1>
+        <>
+          <h1>Welkom, {userProfile.name} 👋</h1>
+          <ShopInfo />
+          <BookingForm userProfile={userProfile} />
+        </>
       )}
     </>
   );
