@@ -1,71 +1,58 @@
-// src/components/UserProfileForm.jsx
-import { useState } from "react";
-import { toast } from "react-toastify";
-
-const STORAGE_KEY = "userProfile";
-
 export default function UserProfileForm({ onSave }) {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-  });
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const validate = () => {
-    if (!formData.name.trim()) return "Naam is verplicht";
-    if (!formData.email.includes("@")) return "Ongeldig emailadres";
-    if (!formData.phone.trim()) return "Telefoonnummer is verplicht";
-    return null;
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const error = validate();
-    if (error) {
-      toast.error(error);
-      return;
-    }
+    const formData = new FormData(e.target);
+    const profile = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      phone: formData.get("phone"),
+    };
 
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
-    toast.success("Profiel succesvol opgeslagen!");
-    onSave(formData);
+    localStorage.setItem("userProfile", JSON.stringify(profile));
+    onSave(profile);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Profiel instellen</h2>
+    <div className="min-h-screen bg-zinc-900 flex items-center justify-center">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-zinc-800 p-8 rounded-2xl shadow-2xl w-full max-w-md space-y-5"
+      >
+        <h1 className="text-3xl font-bold text-white text-center">
+          Fade & Blade
+        </h1>
 
-      <input
-        name="name"
-        placeholder="Naam"
-        value={formData.name}
-        onChange={handleChange}
-      />
+        <p className="text-zinc-400 text-center">
+          Maak je profiel aan
+        </p>
 
-      <input
-        name="email"
-        type="email"
-        placeholder="Email"
-        value={formData.email}
-        onChange={handleChange}
-      />
+        <input
+          name="name"
+          placeholder="Naam"
+          required
+          className="w-full p-3 rounded-lg bg-zinc-700 text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
+        />
 
-      <input
-        name="phone"
-        placeholder="Telefoon"
-        value={formData.phone}
-        onChange={handleChange}
-      />
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          required
+          className="w-full p-3 rounded-lg bg-zinc-700 text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
+        />
 
-      <button type="submit">Opslaan</button>
-    </form>
+        <input
+          name="phone"
+          placeholder="Telefoon"
+          required
+          className="w-full p-3 rounded-lg bg-zinc-700 text-white placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500"
+        />
+
+        <button className="w-full bg-amber-500 hover:bg-amber-600 text-black font-semibold py-3 rounded-lg transition">
+          Opslaan
+        </button>
+      </form>
+    </div>
   );
 }

@@ -1,4 +1,3 @@
-// src/components/BookingForm.jsx
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { services } from "../data/shopData";
@@ -6,116 +5,111 @@ import { services } from "../data/shopData";
 const STORAGE_KEY = "appointments";
 
 export default function BookingForm({ userProfile }) {
-  // -----------------------------
-  // 1. STATE (formulierwaarden)
-  // -----------------------------
   const [serviceId, setServiceId] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
 
-  // -----------------------------
-  // 2. SUBMIT HANDLER
-  // -----------------------------
-  const handleSubmit = (e) => {
-    e.preventDefault(); // ❗ voorkomt page refresh
+  function handleSubmit(e) {
+    e.preventDefault(); // ⛔ geen page refresh
 
-    // 2.1 Validatie
+    // 1️⃣ validatie
     if (!serviceId || !date || !time) {
       toast.error("Vul alle velden in");
       return;
     }
 
-    // 2.2 Gekozen service ophalen
-    const selectedService = services.find(
-      (service) => service.id === Number(serviceId)
+    // 2️⃣ service info ophalen
+    const service = services.find(
+    (s) => s.id === Number(serviceId)
     );
 
-    // 2.3 Afspraak object maken
+    // 3️⃣ bestaande afspraken ophalen
+    const existing =
+      JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+
+    // 4️⃣ nieuwe afspraak maken
     const newAppointment = {
-      id: Date.now(),
-      name: userProfile.name,
-      email: userProfile.email,
-      phone: userProfile.phone,
-      serviceId: selectedService.id,
-      serviceName: selectedService.name,
-      price: selectedService.price,
+      id: crypto.randomUUID(),
+      serviceId: service.id,
+      serviceName: service.name,
+      price: service.price,
       date,
       time,
     };
 
-    // 2.4 Bestaande afspraken ophalen
-    const existingAppointments =
-      JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-
-    // 2.5 Nieuwe afspraak toevoegen
-    const updatedAppointments = [
-      ...existingAppointments,
-      newAppointment,
-    ];
-
-    // 2.6 Opslaan in localStorage
+    // 5️⃣ opslaan
     localStorage.setItem(
       STORAGE_KEY,
-      JSON.stringify(updatedAppointments)
+      JSON.stringify([...existing, newAppointment])
     );
 
-    // 2.7 Feedback
-    toast.success("Afspraak succesvol geboekt!");
+    // 6️⃣ UX
+    toast.success("Afspraak succesvol geboekt");
 
-    // (optioneel) formulier resetten
+    // 7️⃣ formulier reset
     setServiceId("");
     setDate("");
     setTime("");
-  };
+  }
 
-  // -----------------------------
-  // 3. JSX (wat je ziet op scherm)
-  // -----------------------------
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Afspraak boeken</h2>
+    <form
+      onSubmit={handleSubmit}
+      className="bg-zinc-800 p-6 rounded-2xl shadow-xl max-w-xl"
+    >
+      <h2 className="text-2xl font-semibold mb-6">
+        Afspraak boeken
+      </h2>
 
-      {/* User info (alleen lezen) */}
-      <input value={userProfile.name} disabled />
-      <input value={userProfile.email} disabled />
-      <input value={userProfile.phone} disabled />
+      <div className="space-y-4">
+        <input
+          value={userProfile.name}
+          disabled
+          className="w-full p-3 rounded-lg bg-zinc-700 text-zinc-300"
+        />
 
-      {/* Service selectie */}
-      <select
-        value={serviceId}
-        onChange={(e) => setServiceId(e.target.value)}
-      >
-        <option value="">Selecteer service</option>
-        {services.map((service) => (
-          <option key={service.id} value={service.id}>
-            {service.name} (€{service.price})
-          </option>
-        ))}
-      </select>
+        <select
+          value={serviceId}
+          onChange={(e) => setServiceId(e.target.value)}
+          className="w-full p-3 rounded-lg bg-zinc-700 text-white"
+        >
+          <option value="">Selecteer service</option>
+          {services.map((s) => (
+            <option key={s.id} value={s.id}>
+              {s.name} (€{s.price})
+            </option>
+          ))}
+        </select>
 
-      {/* Datum */}
-      <input
-        type="date"
-        value={date}
-        min={new Date().toISOString().split("T")[0]}
-        onChange={(e) => setDate(e.target.value)}
-      />
+        <input
+          type="date"
+          value={date}
+          min={new Date().toISOString().split("T")[0]}
+          onChange={(e) => setDate(e.target.value)}
+          className="w-full p-3 rounded-lg bg-zinc-700 text-white"
+        />
 
-      {/* Tijd */}
-      <select
-        value={time}
-        onChange={(e) => setTime(e.target.value)}
-      >
-        <option value="">Selecteer tijd</option>
-        <option value="09:00">09:00</option>
-        <option value="10:00">10:00</option>
-        <option value="11:00">11:00</option>
-        <option value="13:00">13:00</option>
-        <option value="14:00">14:00</option>
-        <option value="15:00">15:00</option>
-      </select>
+        <select
+          value={time}
+          onChange={(e) => setTime(e.target.value)}
+          className="w-full p-3 rounded-lg bg-zinc-700 text-white"
+        >
+          <option value="">Selecteer tijd</option>
+          <option>09:00</option>
+          <option>10:00</option>
+          <option>11:00</option>
+          <option>13:00</option>
+          <option>14:00</option>
+          <option>15:00</option>
+        </select>
 
-      <button type="submit">Boek afspraak</button>
+        <button
+          type="submit"
+          className="w-full bg-amber-500 hover:bg-amber-600 text-black font-semibold py-3 rounded-lg transition"
+        >
+          Boek afspraak
+        </button>
+      </div>
     </form>
   );
 }
